@@ -46,3 +46,4 @@ void print2DArray(double[,] arrayToPrint)
 
 double[,] generatedArray =  generate2DArray(7, 5 , 1 ,10);
 print2DArray(generatedArray);
+

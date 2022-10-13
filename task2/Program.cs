@@ -7,75 +7,45 @@
 8 4 2 4
 Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 */
-int[,] generate2DArray(int height, int width, int randomStart, int RandomEnd)
+int[,] GetMatrix(int rows, int columns)
 {
-    int[,] two2DArray = new int[height, width];
-    for (int i = 0; i < height; i++)
+    int[,] matrix = new int[rows, columns];
+    Random rnd = new Random();
+    for (int i = 0; i < matrix.GetLength(0); i++)
     {
-        for (int j = 0; j < width; j++)
+        for (int j = 0; j < matrix.GetLength(1); j++)
         {
-            two2DArray[i, j] = new Random().Next(randomStart, RandomEnd + 1);
+            matrix[i, j] = rnd.Next(1, 10);
         }
     }
-    return two2DArray;
+    return matrix;
 }
 
-// for (int i = 0; i < height; i++)
-//     {
-//         int sum = 0;
-//         for (int j = 0; j < width; j++)
-//         {
-//             sum += two2DArray[j,i];
-//         }
-//     }
-//     return sum;
-    
+void PrintMatrix(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            if (j == 0) Console.Write("[");
+            if (j < array.GetLength(1) - 1) Console.Write($"{array[i, j],3},");
+            else Console.Write($"{array[i, j],3} ]");
+        }
+        Console.WriteLine();
+    }
+}
 
-int[,] generatedArray =  generate2DArray(6, 5 , 1 ,10);
-Console.WriteLine();
+int[,] matrix = GetMatrix(5,6);
+PrintMatrix(matrix);
+System.Console.WriteLine();
 
-
-
-
-// for (int i = 0; i < TwoDArray.GetLength(0); i++)
-// {
-//     int summ = 0;
-//     for (int j = 0; j < TwoDArray.GetLength(1); j++)
-//     {
-//         summ = summ + TwoDArray[j, i];
-//     }
-//     double average = summ / 3;
-//     int n = i + 1;
-//     Console.WriteLine("Avarage for " + n + " column is " + average);
-// }
-
-
-// print2DArray(TwoDArray);
-// Console.WriteLine();
-// int[] sumOfColumn = getElementsOfColumns(column);
-// printArrayColumns(column);
-
-// Random random = new Random();
-// int[,] arr = new int[random.Next(1, 5), random.Next(1, 10)];
-// for (int i = 0; i < arr.GetLength(0); i++)
-// {
-//     for (int j = 0; j < arr.GetLength(1); j++)
-//     {
-//         arr[i, j] = random.Next(1, 10);
-//         Console.Write(arr[i, j] + " ");
-//     }
-//     Console.WriteLine();
-// }
-// Console.WriteLine("---------------------------");
-
-
-for (int j = 0; j < width; j++)
+for (int j = 0; j < matrix.GetLength(1); j++)
 {
     double sum = 0;
-    for (int i = 0; i < height; i++)
+    for (int i = 0; i < matrix.GetLength(0); i++)
     {
-        sum += two2DArray[i, j];
+        sum += matrix[i, j];
     }
-    Console.Write($"{ sum / matrix.GetLength(0)} ");
+    double average = Math.Round(sum / matrix.GetLength(0), 1);
+    Console.WriteLine($"Среднее арифметическое:{average}"); 
 }
-Console.ReadLine();
